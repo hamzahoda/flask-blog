@@ -129,12 +129,7 @@ def dashboard():
 def edit(sno):
     if('user' in session and session['user'] == params['admin-user']):
         if request.method == "POST":
-            box_title = request.form.get('title')
-            tline = request.form.get('tline')
-            slug = request.form.get('slug')
-            content = request.form.get('content')
-            img_file = request.form.get('img_file')
-            date = datetime.now()
+            box_title,tline,slug,content,img_file,date,  = request.form.get('title'),request.form.get('tline'),request.form.get('slug'),request.form.getrequest.form.get('img_file'),('content'),datetime.now()
             if sno == "0":
                 post = Posts(title=box_title, slug=slug, content=content,
                              tagline=tline, img_file=img_file, date=date)
@@ -143,12 +138,7 @@ def edit(sno):
 
             else:
                 post = Posts.query.filter_by(sno=sno).first()
-                post.title = box_title
-                post.slug = slug
-                post.content = content
-                post.tagline = tline
-                post.img_file = img_file
-                post.date = date
+                post.title,post.slug,post.content,post.tagline,post.img_file,post.date  = box_title,slug,content,tline,img_file,date
                 db.session.commit()
                 return redirect('/edit/'+sno)
         post = Posts.query.filter_by(sno=sno).first()
@@ -177,10 +167,7 @@ def uploader():
 def contact():
     if (request.method == 'POST'):
         # add entry to database
-        name = request.form.get('name')
-        email = request.form.get('email')
-        phone = request.form.get('phone')
-        message = request.form.get('message')
+        name, email,phone,message= request.form.get('name'),request.form.get('email'),request.form.get('phone'),request.form.get('message')
         entry = Contacts(name=name, phone_num=phone,
                          msg=message, date=datetime.now(), email=email)
         db.session.add(entry)

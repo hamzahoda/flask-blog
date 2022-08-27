@@ -1,3 +1,6 @@
+# Flask Blog App
+
+A Simple blog app using flask and mysql
 
 ## API Reference
 
